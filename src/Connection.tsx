@@ -70,7 +70,7 @@ export default function Connection({ from, to }) {
     console.log("connections", from, to);
 
     const response = await axios.get(
-      "http://transport.opendata.ch/v1/connections",
+      "https://transport.opendata.ch/v1/connections",
       {
         params: {
           from: from,
