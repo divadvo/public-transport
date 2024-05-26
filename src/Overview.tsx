@@ -64,6 +64,11 @@ const groupsOriginal = [
       { from: "Zürich Oerlikon", to: "Zürich Altstetten" },
     ],
   },
+  {
+    from: "Home",
+    to: "Airport",
+    connections: [{ from: "Zürich, Seebach", to: "Zürich Flughafen" }],
+  },
 ];
 
 function swapFromTo(groups) {
