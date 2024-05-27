@@ -29,15 +29,29 @@ function ConnectionTable({ connections }) {
       "m'"
     );
 
+    const delayedDisplay = (
+      <>
+        {"+"}
+        {delayFormatted} = {expectedDepartureFormatted}
+      </>
+    );
+
+    const delayedDisplayArrival = (
+      <>
+        {"+"}
+        {delayFormatted} = {expectedArrivalFormatted}
+      </>
+    );
+
     return (
       <Table.Tr key={connection.from.departure}>
         <Table.Td>
           {departureFormatted}
-          {isDelayed && ({ delayFormatted } = { expectedDepartureFormatted })}
+          {isDelayed && delayedDisplay}
         </Table.Td>
         <Table.Td>
           {arrivalFormatted}
-          {isDelayed && ({ delayFormatted } = { expectedArrivalFormatted })}
+          {isDelayed && delayedDisplayArrival}
         </Table.Td>
         <Table.Td>
           {connection.products}
