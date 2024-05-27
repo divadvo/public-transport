@@ -7,20 +7,22 @@ import {
   Card,
   Group,
   Container,
+  NativeSelect,
+  Radio,
 } from "@mantine/core";
 import Connection from "./Connection";
 import { useState } from "react";
 
-const GroupView = ({ group, swapConnections }) => {
+const GroupView = ({ group, swapConnections, refreshKey }) => {
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Group justify="space-between" mt="md" mb="xs">
         <Text fw={500}>
           {group.from} - {group.to}
         </Text>
-        <Button variant="subtle" onClick={(e) => swapConnections()}>
+        {/* <Button variant="subtle" onClick={(e) => swapConnections()}>
           Opposite
-        </Button>
+        </Button> */}
       </Group>
 
       <Flex
@@ -32,7 +34,7 @@ const GroupView = ({ group, swapConnections }) => {
         wrap="wrap"
       >
         {group.connections.map((connection) => (
-          <Connection {...connection} />
+          <Connection refreshKey={refreshKey} {...connection} />
         ))}
       </Flex>
     </Card>
@@ -71,32 +73,60 @@ const groupsOriginal = [
   },
 ];
 
-function swapFromTo(groups) {
-  return groups.map((group) => {
-    return {
-      from: group.to,
-      to: group.from,
-      connections: group.connections.reverse().map((connection) => ({
+function swapFromToSingle(group) {
+  return {
+    from: group.to,
+    to: group.from,
+    connections: group.connections
+      .slice()
+      .reverse()
+      .map((connection) => ({
         from: connection.to,
         to: connection.from,
       })),
-      //   connections: group.connections,
-    };
-  });
+    //   connections: group.connections,
+  };
+}
+
+function swapFromTo(groups) {
+  return groups.map((group) => swapFromToSingle(group));
 }
 
 export default function Overview() {
   const [groups, setGroups] = useState(groupsOriginal);
-  const swapConnections = () => {
-    const swappedGroups = swapFromTo(groups);
-    setGroups(swappedGroups);
+  const [selectedGroupIndex, setSelectedGroupIndex] = useState("0");
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleRefresh = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
   };
+
+  const selectedGroup = groups[parseInt(selectedGroupIndex)];
+  const selectedGroupInverted = swapFromToSingle(selectedGroup);
+  // const swapConnections = () => {
+  //   const swappedGroups = swapFromTo(groups);
+  //   setGroups(swappedGroups);
+  // };
 
   return (
     <Container>
-      {groups.map((group) => (
-        <GroupView group={group} swapConnections={swapConnections} />
-      ))}
+      <Radio.Group value={selectedGroupIndex} onChange={setSelectedGroupIndex}>
+        <Group mt="xs">
+          {groups.map((group, index) => (
+            <Radio key={index} value={`${index}`} label={group.to} />
+          ))}
+          <Button onClick={handleRefresh}>Reload</Button>
+        </Group>
+      </Radio.Group>
+
+      {/* {groups.map((group) => (
+        <GroupView
+          group={group}
+          swapConnections={swapConnections}
+        />
+      ))} */}
+      <GroupView group={selectedGroup} refreshKey={refreshKey} />
+      <GroupView group={selectedGroupInverted} refreshKey={refreshKey} />
     </Container>
   );
 }

@@ -77,12 +77,10 @@ function ConnectionTable({ connections }) {
   );
 }
 
-export default function Connection({ from, to }) {
+export default function Connection({ from, to, refreshKey }) {
   const [connections, setConnections] = useState([]);
 
   const loadConnections = async () => {
-    console.log("connections", from, to);
-
     const response = await axios.get(
       "https://transport.opendata.ch/v1/connections",
       {
@@ -99,7 +97,7 @@ export default function Connection({ from, to }) {
 
   useEffect(() => {
     loadConnections();
-  }, [from]);
+  }, [from, to, refreshKey]);
 
   return (
     <Container>
