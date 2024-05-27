@@ -13,16 +13,22 @@ import {
 import Connection from "./Connection";
 import { useState } from "react";
 
-const GroupView = ({ group, swapConnections, refreshKey }) => {
+const GroupView = ({ group, swapConnections }) => {
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleRefresh = () => {
+    setRefreshKey((prevKey) => prevKey + 1);
+  };
+
   return (
     <Card shadow="sm" padding="lg" radius="md" withBorder>
       <Group justify="space-between" mt="md" mb="xs">
         <Text fw={500}>
           {group.from} - {group.to}
         </Text>
-        {/* <Button variant="subtle" onClick={(e) => swapConnections()}>
-          Opposite
-        </Button> */}
+        <Button variant="subtle" onClick={handleRefresh}>
+          Reload
+        </Button>
       </Group>
 
       <Flex
@@ -95,11 +101,6 @@ function swapFromTo(groups) {
 export default function Overview() {
   const [groups, setGroups] = useState(groupsOriginal);
   const [selectedGroupIndex, setSelectedGroupIndex] = useState("0");
-  const [refreshKey, setRefreshKey] = useState(0);
-
-  const handleRefresh = () => {
-    setRefreshKey((prevKey) => prevKey + 1);
-  };
 
   const selectedGroup = groups[parseInt(selectedGroupIndex)];
   const selectedGroupInverted = swapFromToSingle(selectedGroup);
@@ -115,7 +116,6 @@ export default function Overview() {
           {groups.map((group, index) => (
             <Radio key={index} value={`${index}`} label={group.to} />
           ))}
-          <Button onClick={handleRefresh}>Reload</Button>
         </Group>
       </Radio.Group>
 
@@ -125,8 +125,8 @@ export default function Overview() {
           swapConnections={swapConnections}
         />
       ))} */}
-      <GroupView group={selectedGroup} refreshKey={refreshKey} />
-      <GroupView group={selectedGroupInverted} refreshKey={refreshKey} />
+      <GroupView group={selectedGroup} />
+      <GroupView group={selectedGroupInverted} />
     </Container>
   );
 }
