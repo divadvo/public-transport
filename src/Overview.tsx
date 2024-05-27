@@ -119,12 +119,6 @@ export default function Overview() {
         </Group>
       </Radio.Group>
 
-      {/* {groups.map((group) => (
-        <GroupView
-          group={group}
-          swapConnections={swapConnections}
-        />
-      ))} */}
       <GroupView group={selectedGroup} />
       <GroupView group={selectedGroupInverted} />
     </Container>
