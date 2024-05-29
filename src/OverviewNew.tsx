@@ -75,18 +75,20 @@ function ConnectionTable({ connections }) {
   });
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Departure</th>
-          <th>Arrival</th>
-          <th>Connection</th>
-          <th>Platform</th>
-          <th>Duration</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
+    <div class="overflow-auto">
+      <table>
+        <thead>
+          <tr>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Connection</th>
+            <th>Platform</th>
+            <th>Duration</th>
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </table>
+    </div>
   );
 }
 
@@ -122,10 +124,8 @@ const Connection = ({ from, to, refreshKey }) => {
       <div role="group">
         <p>
           {from} - {to}
-        </p>
-        <p>{loading && <span aria-busy="true">Loading...</span>}</p>
-        <p>
-          <small>Last Reloaded: {lastReloaded}</small>
+          <small> (Last Reloaded: {lastReloaded})</small>
+          {loading && <span aria-busy="true">Loading...</span>}
         </p>
       </div>
       <ConnectionTable connections={connections} />
@@ -162,7 +162,8 @@ export default function OverviewNew() {
 
   return (
     <main class="container">
-      <div role="group">
+      {/* <div role="group"> */}
+      <div>
         <div>
           <fieldset>
             {groupsOriginal.map((group, index) => (
