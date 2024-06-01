@@ -75,7 +75,7 @@ function ConnectionTable({ connections }) {
   });
 
   return (
-    <div class="overflow-auto">
+    <div className="overflow-auto">
       <table>
         <thead>
           <tr>
@@ -133,7 +133,7 @@ const Connection = ({ from, to, refreshKey }) => {
   );
 };
 
-export default function OverviewNew() {
+export default function Overview() {
   const [selectedOption, setSelectedOption] = useState(null);
 
   const handleChange = (event) => {
@@ -161,8 +161,7 @@ export default function OverviewNew() {
     : swapFromToSingle(selectedOption);
 
   return (
-    <main class="container">
-      {/* <div role="group"> */}
+    <main className="container">
       <div>
         <div>
           <fieldset>
@@ -197,12 +196,6 @@ export default function OverviewNew() {
           </div>
         )}
       </div>
-
-      {/* {selectedOption && (
-        <div>
-          <pre>{JSON.stringify(travellingOption, null, 2)}</pre>
-        </div>
-      )} */}
 
       {travellingOption && (
         <div>

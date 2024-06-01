@@ -1,5 +1,5 @@
-# Mantine Vite template
+# Public Transport App
 
-Get started with the template by clicking `Use this template` button on the top of the page.
+Shows a minimal overview of public transport connections for the places I usually travel to.
 
-[Documentation](https://mantine.dev/guides/vite/)
+Made with React, vite, [PicoCSS](https://picocss.com/), [Swiss Public Transport API](https://transport.opendata.ch/).
