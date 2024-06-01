@@ -109,7 +109,7 @@ const Connection = ({ from, to, refreshKey }) => {
       }
     );
     const result = response.data.connections;
-    console.log("got data connections", from, to, result);
+    console.log("Got data for connection:", from, " - ", to, result);
     setConnections(result);
     setLoading(false);
     setLastReloaded(dayjs().format("HH:mm:ss"));
