@@ -105,6 +105,7 @@ const Connection = ({ from, to, refreshKey }) => {
         params: {
           from: from,
           to: to,
+          limit: 8,
         },
       }
     );
