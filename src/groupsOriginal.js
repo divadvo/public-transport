@@ -28,6 +28,13 @@ const groupsOriginal = [
     to: "Airport",
     connections: [{ from: "Zürich, Seebach", to: "Zürich Flughafen" }],
   },
+  {
+    from: "Home",
+    to: "Oerlikon",
+    connections: [
+      { from: "Zürich, Seebach", to: "Zürich Oerlikon, Bahnhof Ost" },
+    ],
+  },
 ];
 
 export default groupsOriginal;
