@@ -1,7 +1,7 @@
 const groupsOriginal = [
   {
     from: "Home",
-    to: "Salsa",
+    to: "Hardbrücke",
     connections: [
       { from: "Zürich, Seebach", to: "Zürich Oerlikon, Bahnhof Ost" },
       { from: "Zürich Oerlikon", to: "Zürich Hardbrücke" },
@@ -33,6 +33,14 @@ const groupsOriginal = [
     to: "Oerlikon",
     connections: [
       { from: "Zürich, Seebach", to: "Zürich Oerlikon, Bahnhof Ost" },
+    ],
+  },
+  {
+    from: "Home",
+    to: "Uetlihof",
+    connections: [
+      { from: "Zürich, Seebach", to: "Zürich Bahnhofquai/HB" },
+      { from: "Zürich Bahnhofquai/HB", to: "Zürich Uetlihof" },
     ],
   },
 ];
